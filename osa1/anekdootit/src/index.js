@@ -5,17 +5,18 @@ const Button = ({action, text}) => <button onClick={action}> {text} </button>
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
-  const points = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
-  const [voted, setVotes] = useState(0)
+  const points = Array.apply(null, new Array(6)).map(Number.prototype.valueOf,0);
+  const [stats, setPoints] = useState(0)
   
   const handler = () => {
       const newselected = Math.floor(Math.random()*anecdotes.length)
       setSelected(newselected)
+      console.log(newselected)
   }
   const vote = item => { 
-    const copy = { ...points }
-    points [item]+= 1
-    copy [item] += 1
+    const copy = [...points]
+    copy[item-1] += 1    
+    setPoints(copy) 
     console.log(copy)
   }
 
@@ -24,7 +25,7 @@ const App = (props) => {
     <div>
         <h1>Anecdote of the day</h1>
         {props.anecdotes[selected]}
-        <p>has {points[selected]} votes</p>
+        <p>has {stats[selected]} votes</p>
         <Button action={() => vote(selected)} text='vote' /> 
         <Button action={() => handler()} text='next anecdote' />
         <h1>Anecdote with most votes</h1>
