@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Note from './components/Note'
-import App from './rm -rf .gitApp'
+import App from './App'
 
 const notes = [
   {
